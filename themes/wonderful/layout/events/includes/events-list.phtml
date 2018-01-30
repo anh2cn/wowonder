@@ -1,0 +1,40 @@
+<div class="col-md-12 events-list-wrapper" data-event="<?php echo($wo['event']['id']);?>">
+	<div class="row">
+			<div class="events-list-cover">
+					<a href="<?php echo $wo['event']['url']; ?>">
+						<img src="<?php echo $wo['event']['cover']; ?>" class="events-list-cover-img">
+					</a>
+					<div style="padding:5px;display: flex;align-items: center;">
+						<a href="<?php echo $wo['event']['url']; ?>" style="text-decoration:none">
+							<p class="events-list-name">
+							<?php echo $wo['event']['name']; ?>
+							</p>
+				
+							<div style="padding-left: 10px;">
+								<i class="zmdi zmdi-calendar" style="font-size: 15px;margin: -1px 2px 0px 0px;"></i>
+							<?php echo $wo['event']['start_date'];?> <br/>
+								<i class="zmdi zmdi-pin" style="font-size: 15px;margin: -1px 2px 0px 2px;"></i> <?php echo $wo['lang']['located_in']; ?>
+								<?php echo $wo['event']['location'];?>
+							</div>
+						</a>
+				
+						<div class="options-buttons <?php echo Wo_RightToLeft('pull-left');?> " style="margin-top: 10px;position: relative;margin-left: auto;">
+							<span class="user-follow-button">
+							<?php echo Wo_GetInterestedButton($wo['event']['id']);?>
+							</span><br>
+							<span class="user-follow-button">
+							<?php echo Wo_GetGoingButton($wo['event']['id']);?>
+							</span>
+						</div>
+					</div>
+	  
+				<hr>
+				<div class="text-left" style="color: #52636d;padding: 7px 10px 8px 10px;">     
+				<p><?php echo mb_substr($wo['event']['description'], 0, 220, "UTF-8") . '...';?> <a href="<?php echo $wo['event']['url']; ?>" class="hash"><?php echo $wo["lang"]["read_more"];?></a></p>
+				</div>
+                
+			</div>
+		<div class="clear"></div>
+	</div>
+	<div class="clear"></div>
+</div>

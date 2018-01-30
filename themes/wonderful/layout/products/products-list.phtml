@@ -1,0 +1,39 @@
+
+<div class="awesomeproduct">
+	<div class="product" id="product-<?php echo $wo['product']['id']?>" data-id="<?php echo $wo['product']['id']?>">	
+			<div class="productlist">
+				<div class="product-image">
+					<a href="<?php echo $wo['product']['url'];?>" title="<?php echo $wo['product']['name']?>"><img src="<?php echo $wo['product']['images'][0]['image_org'];?>" alt="" /></a>
+								<?php if ($wo['product']['giakm'] == 0):?>
+										<div class="product-price text-right"><?php echo number_format($wo['product']['price'], 0, '.', ',')?><?php echo (!empty($wo['currencies'][$wo['product']['currency']]['symbol'])) ? $wo['currencies'][$wo['product']['currency']]['symbol'] : $wo['config']['classified_currency_s'];?></div>
+										<?php else:?>
+										<div class="product-price text-right"><span class="product-giakm"><?php echo number_format($wo['product']['price'], 0, '.', ',')?></span>
+											<?php echo number_format($wo['product']['giakm'], 0, '.', ',')?><?php echo (!empty($wo['currencies'][$wo['product']['currency']]['symbol'])) ? $wo['currencies'][$wo['product']['currency']]['symbol'] : $wo['config']['classified_currency_s'];?>
+										</div>
+									<?php endif;?>
+
+
+
+						<div class="productlinks pull-left">	
+								<span class="contact btn" onclick="Wo_OpenChatTab(<?php echo $wo['product']['seller']['id']?>)" data-toggle="tooltip" title="<?php echo $wo['lang']['contact_seller'] ?>">
+									<i class="zmdi zmdi-comment-text-alt" style="font-size:24px;color:#ff9800"></i> 
+								</span> 					
+						</div>
+				</div>
+			</div>		
+				<div class="producttitles">
+													<a href="<?php echo $wo['product']['url'];?>" title="<?php echo $wo['product']['name']?>">
+									<?php if (strlen($wo['product']['name']) > 35):?>
+										<?php echo mb_substr($wo['product']['name'],0,35,"UTF-8") . ".."; ?>
+										<?php else:?>
+										<?php echo $wo['product']['name']?>
+									<?php endif;?>
+								</a>
+				</div>
+				<div class="product-by">
+				    <a href="<?php echo $wo['product']['seller']['url'];?>"><?php echo $wo['product']['seller']['name'];?></a>, đăng <?php echo $wo['product']['time_text'];?>, trong <?php echo $wo['products_categories'][$wo['product']['category']];?>				</div>	
+		<div class="clear"></div>
+	</div>
+</div>
+
+

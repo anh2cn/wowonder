@@ -1,0 +1,74 @@
+<nav class="navbar navbar-default ads-navbar-wrapper bg-main hidden-xs" role="navigation" style="padding-right: 0px;">
+  <div id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav ads-nav w100">
+      <li class="pull-left">
+        <a class="wabe <?php echo ($wo['ap'] == 'ads') ? 'active' : ''; ?>" href="<?php echo Wo_SeoLink('index.php?link1=ads'); ?>"><i class="zmdi zmdi-dns" style="font-size: 18px;margin-top: -3px;"></i>
+          &nbsp;
+          <span>
+            <?php echo $wo['lang']['ads']; ?>
+          </span>
+        </a>
+      </li>
+      <li class="pull-left">
+        <a class="wabe <?php echo ($wo['ap'] == 'wallet') ? 'active' : ''; ?>" href="<?php echo Wo_SeoLink('index.php?link1=wallet'); ?>">
+        <i class="zmdi zmdi-balance-wallet" style="font-size: 18px;margin-top: -3px;"></i>
+          &nbsp;
+          <span>
+            <?php echo $wo['lang']['wallet']; ?> <!--(<?php echo Wo_GetCurrency($wo['config']['ads_currency']) ?><?php echo $wo['user']['wallet'] ?>)-->
+          </span>
+        </a>
+      </li>
+	  <li class="pull-left">
+        <a class="wabe <?php echo ($wo['ap'] == 'send') ? 'active' : ''; ?>" href="<?php echo Wo_SeoLink('index.php?link1=send_money'); ?>">
+        <i class="fa fa-exchange" aria-hidden="true"></i>
+          &nbsp;
+          <span>
+            <?php echo $wo['lang']['send_money']; ?>
+          </span>
+        </a>
+      </li>
+
+      <li class="pull-right">
+        <a class="wabe <?php echo ($wo['ap'] == 'create') ? 'active' : ''; ?>" href="<?php echo Wo_SeoLink('index.php?link1=create-ads'); ?>"><i class="zmdi zmdi-plus-circle" style="font-size: 18px;margin-top: -3px;"></i> 
+        <?php echo $wo['lang']['create']; ?>
+        <?php echo $wo['lang']['new']; ?>
+        </a>
+      </li>
+    </ul>
+
+  </div>
+  <div class="clear"></div>
+</nav>
+
+<nav class="navbar navbar-default ads-navbar-wrapper ads-navbar-mobile-wrapper bg-main hidden-sm hidden-md hidden-lg" role="navigation" style="padding-right: 0px;">
+  <div  id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav ads-nav w100">
+
+      <li class="pull-left">
+        <a href="<?php echo Wo_SeoLink('index.php?link1=ads'); ?>">
+          <i class="zmdi zmdi-dns" style="font-size: 18px;margin-top: -3px;"></i>
+        </a>
+      </li>
+      <li class="pull-left">
+        <a href="<?php echo Wo_SeoLink('index.php?link1=wallet'); ?>">
+          <i class="zmdi zmdi-balance-wallet" style="font-size: 18px;margin-top: -3px;"></i>
+        </a>
+      </li>
+	  <li class="pull-left">
+        <a href="<?php echo Wo_SeoLink('index.php?link1=send_money'); ?>">
+        <i class="fa fa-exchange" aria-hidden="true"></i>
+        </a>
+      </li>
+
+      <li class="pull-right">
+      	<a href="<?php echo Wo_SeoLink('index.php?link1=create-ads'); ?>">
+        <i class="zmdi zmdi-plus-circle" style="font-size: 18px;margin-top: -3px;"></i>
+        <?php echo $wo['lang']['create']; ?>
+        <?php echo $wo['lang']['new']; ?>
+        </a>
+      </li>
+    </ul>
+
+  </div>
+  <div class="clear"></div>
+</nav>

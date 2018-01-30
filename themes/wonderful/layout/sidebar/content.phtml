@@ -1,0 +1,406 @@
+<div class="sidebar-conatnier">
+	<div class="sidebar">
+		<?php if ($wo['page'] == 'home') { ?>
+		<?php if ($wo['config']['user_status'] == 1) { ?>
+			<div class="user-status-home user-status-pc">
+				<div class="side-widget-name">
+					<?php echo $wo['lang']['story'] ?>
+				</div>
+				<ul class="status-list">
+					<li>
+						<div class="user-avatar" data-toggle="modal" data-target="#modal_story_box">
+							<a href="javascript:;"><img src="<?php echo $wo['user']['avatar'];?>"></a>
+							<div class="plus"><i class="fa fa-plus-circle"></i></div>
+						</div>  
+						<p><a href="<?php echo Wo_SeoLink('index.php?link1=create-status'); ?>"><?php echo $wo['lang']['story'] ?></a></p>
+					</li>
+					<?php
+					if ($wo['config']['user_status'] == 1) {
+					$get_user_status = Wo_GetFriendsStatus(array('limit' => 6));
+					if (!empty($get_user_status)) {
+					?>
+					<?php
+					foreach ($get_user_status as $key => $wo['user_status']) {
+					echo Wo_LoadPage('home/user-status');
+					}
+					} 
+					if (Wo_CountStories() > 6) {
+					?>
+					<li class="view-more-stories" title="<?php echo $wo['lang']['see_all'] ?>">
+						<div class="user-avatar" onclick="window.location.href='<?php echo Wo_SeoLink('index.php?link1=more-status'); ?>'" title="<?php echo $wo['lang']['see_all'] ?>">
+							<i class="zmdi zmdi-view-carousel" style="font-size: 32px;margin-top: 10px;"></i>
+						</div>
+						<p><a href="<?php echo Wo_SeoLink('index.php?link1=more-status'); ?>"><?php echo $wo['lang']['see_all'] ?></a></p>
+					</li>
+					<div class="clear"></div>
+					<?php } } ?>
+				</ul>
+			</div>
+		<?php } ?>
+		<?php } ?>
+		
+		<?php
+        $birth = Wo_CheckBirthdays();
+        if (count($birth) > 0) { ?>
+        <ul class="list-group" style="background-color: #d6d6d6;">
+            <div class="bdaybg-img" style="background-image: url(<?php echo $wo['config']['theme_url'] . '/img/balloons.png';?>);">
+                <span style="color: #ffffff;font-size: 18px;position: absolute;top: 20px;left: 80px;font-family: roboto;"><?php echo $wo['lang']['friends_birthdays'];?></span>
+            </div>
+            <div class="sidebar-users-may-know-container" style="padding: 0px 10px 10px;margin-top: -20px;">
+                <?php 
+                    foreach ($birth as $wo['UsersList']) {
+                        $wo['UsersList']['user_name'] = mb_substr($wo['UsersList']['name'],0,10, "utf-8");
+                        echo Wo_LoadPage('sidebar/sidebar-birthday-list');
+                    } 
+                    ?>
+            </div>
+            <div class="clear"></div>
+        </ul>
+		<?php } ?>
+		
+        <ul class="list-group trending">
+            <li class="list-group-item side-widget-name" contenteditable="false"><?php echo $wo['lang']['trending']; ?></li>
+            <?php 
+                $hashtags = Wa_GetTrendingHashs('popular');
+                if (count($hashtags) > 0) {
+                   foreach ($hashtags as $wo['hashtag']) { 
+                ?>
+            <li class="list-group-item" dir="auto">
+                <a href="<?php echo $wo['hashtag']['url'];?>"><i class="zmdi zmdi-trending-up zmdi-hc-fw" style="color:#03A9F4;font-weight: bold;font-size: 16px;"></i> #<?php echo $wo['hashtag']['tag'];?></a>
+            </li>
+            <?php } } ?>
+            <li>
+                <div class="clear"></div>
+            </li>
+        </ul>
+        <?php 
+        if ($wo['config']['pages'] == 1) {
+        $promoted_page = Wo_GetPromotedPage();
+        if (count($promoted_page) > 0) { ?>
+        <ul class="list-group">
+            <li class="list-group-item text-muted side-widget-name" contenteditable="false">
+                <img style="width:20px;" src="<?php echo $wo['config']['theme_url'] . '/img/promote.png';?>" alt="promoted"> <?php echo $wo['lang']['promoted'];?> 
+                </span>
+            </li>
+            <li>
+            <?php 
+            foreach ($promoted_page as $wo['PageList']) {
+              $wo['PageList']['user_name'] = $wo['PageList']['name'];
+              echo Wo_LoadPage('sidebar/sidebar-home-page-list');
+            }
+            ?>
+            <div class="clear"></div>
+            </li>
+        </ul>
+        <?php } } ?>
+        
+		<?php if ($wo['page'] == 'home') { ?>
+		<ul class="list-group wonderful-weather" style="color: <?php echo $wo['config']['btn_color'];?>;background-color: <?php echo $wo['config']['btn_background_color'];?>;">
+            <li class="list-group-item side-widget-name" contenteditable="false" style="background-color: transparent !important;color: #fff !important;">
+				<?php if($wo['language'] == "english") { ?>Weather<?php } ?>
+				<?php if($wo['language'] == "arabic") { ?>طقس<?php } ?>
+				<?php if($wo['language'] == "dutch") { ?>Weer<?php } ?>
+				<?php if($wo['language'] == "french") { ?>Météo<?php } ?>
+				<?php if($wo['language'] == "german") { ?>Wetter<?php } ?>
+				<?php if($wo['language'] == "italian") { ?>Tempo metereologico<?php } ?>
+				<?php if($wo['language'] == "portuguese") { ?>Clima<?php } ?>
+				<?php if($wo['language'] == "russian") { ?>Погода<?php } ?>
+				<?php if($wo['language'] == "spanish") { ?>Clima<?php } ?>
+				<?php if($wo['language'] == "turkish") { ?>Hava<?php } ?>
+			</li>
+			<?php if(!empty($wo['user']['address'])) {  ?>
+            <div class="" style="padding: 5px 0px 10px;min-height: 259px;">
+                <div id="weather"></div>
+            </div>
+			<?php } else { ?>
+			<div class="" style="padding: 5px 0px 10px;min-height: 100px;">
+				<div class="wonderfulWeather">
+                <ul class="wiForecasts" style="padding: 15px 20px;">
+				<i class="zmdi zmdi-cloud-off" style="font-size: 30px;margin-bottom: 7px;"></i>
+				<p>
+					<?php if($wo['language'] == "english") { ?>Weather needs your Location Info.<?php } ?>
+					<?php if($wo['language'] == "arabic") { ?>الطقس يحتاج معلومات الموقع الخاص بك.<?php } ?>
+					<?php if($wo['language'] == "dutch") { ?>Het weer heeft uw locatiegegevens nodig.<?php } ?>
+					<?php if($wo['language'] == "french") { ?>La météo a besoin de vos informations de localisation.<?php } ?>
+					<?php if($wo['language'] == "german") { ?>Das Wetter benötigt Ihre Standortinformationen.<?php } ?>
+					<?php if($wo['language'] == "italian") { ?>Il tempo ha bisogno delle informazioni sulla posizione.<?php } ?>
+					<?php if($wo['language'] == "portuguese") { ?>O tempo precisa das informações da sua localização.<?php } ?>
+					<?php if($wo['language'] == "russian") { ?>Погода нуждается в вашей информации о местоположении.<?php } ?>
+					<?php if($wo['language'] == "spanish") { ?>El clima necesita tu información de ubicación.<?php } ?>
+					<?php if($wo['language'] == "turkish") { ?>Hava durumunun Konum Bilgisine ihtiyacı var.<?php } ?>
+				</p>
+				<a href="<?php echo Wo_SeoLink('index.php?link1=setting&page=profile-setting'); ?>" data-ajax="?link1=setting&page=profile-setting" class="btn mdbtn wabe btn-default">
+					<?php if($wo['language'] == "english") { ?>Enter Address<?php } ?>
+					<?php if($wo['language'] == "arabic") { ?>أدخل العنوان<?php } ?>
+					<?php if($wo['language'] == "dutch") { ?>Adres invoeren<?php } ?>
+					<?php if($wo['language'] == "french") { ?>Entrer l'adresse<?php } ?>
+					<?php if($wo['language'] == "german") { ?>Adresse eingeben<?php } ?>
+					<?php if($wo['language'] == "italian") { ?>Inserisci indirizzo<?php } ?>
+					<?php if($wo['language'] == "portuguese") { ?>Insira o endereço<?php } ?>
+					<?php if($wo['language'] == "russian") { ?>Введите адрес<?php } ?>
+					<?php if($wo['language'] == "spanish") { ?>Ingresa la direccion<?php } ?>
+					<?php if($wo['language'] == "turkish") { ?>Adresi girin<?php } ?>
+				</a>
+				</ul>
+				</div>
+            </div>
+			<?php } ?>
+            <div class="clear"></div>
+        </ul>
+		<?php } ?>
+		
+        <?php 
+            $users = Wo_UserSug(5);
+            if (count($users) != 0) {
+            ?>
+        <ul class="list-group" id="sidebar-user-list-container">
+            <li class="list-group-item text-muted side-widget-name" contenteditable="false">
+                <?php echo $wo['lang']['people_you_may_know'];?> <span onclick="Wo_ReloadSideBarUsers();" class="<?php echo Wo_RightToLeft('pull-right');?> refresh">
+                <i class="fa fa-repeat progress-icon" data-icon="repeat"></i>
+                </span>
+            </li>
+            <li>
+                <div class="sidebar-users-may-know-container wonder-userz">
+                    <?php 
+                        foreach ($users as $wo['UsersList']) {
+                            $wo['UsersList']['user_name'] = mb_substr($wo['UsersList']['name'],0,10, "utf-8");
+                            echo Wo_LoadPage('sidebar/sidebar-user-list');
+                        } 
+                        ?>
+                </div>
+                <div class="clear"></div>
+            </li>
+        </ul>
+        <?php
+            }
+            if ($wo['config']['pages'] == 1) {
+            $pages = Wo_PageSug(3);
+            if (count($pages) != 0) {
+            ?>
+        <ul class="list-group" id="sidebar-page-list-container">
+            <li class="list-group-item text-muted side-widget-name" contenteditable="false">
+                <?php echo $wo['lang']['pages_you_may_like']; ?>
+                <span onclick="Wo_ReloadSideBarPages();" class="<?php echo Wo_RightToLeft('pull-right');?> refresh">
+                <i class="fa fa-repeat progress-icon" data-icon="repeat"></i>
+                </span>
+            </li>
+            <li>
+                <div class="sidebar-pages-may-know-container">
+                    <?php 
+                        foreach ($pages as $wo['PageList']) {
+                            $wo['PageList']['user_name'] = $wo['PageList']['name'];
+                            echo Wo_LoadPage('sidebar/sidebar-home-page-list');
+                        } 
+                        ?>
+                </div>
+                <div class="clear"></div>
+            </li>
+        </ul>
+        <?php } }  ?>
+        <?php
+        if ($wo['config']['groups'] == 1) {
+            $groups = Wo_GroupSug(5);
+            if (count($groups) > 0) {
+            ?>
+        <ul class="list-group" id="sidebar-group-list-container">
+            <li class="list-group-item text-muted side-widget-name" contenteditable="false">
+                <?php echo $wo['lang']['suggested_groups'];?> <span onclick="Wo_ReloadSideBarGroups();" class="<?php echo Wo_RightToLeft('pull-right');?>  refresh">
+                <i class="fa fa-repeat progress-icon" data-icon="repeat"></i>
+                </span>
+            </li>
+            <li>
+			<div style="overflow: hidden;position: relative;width: 100%;">
+                <div class="sidebar-groupz-may-know-container">
+                    <?php 
+                        foreach ($groups as $wo['GroupList']) {
+                            $wo['GroupList']['name'] = mb_substr($wo['GroupList']['name'],0,20, "utf-8");
+                            echo Wo_LoadPage('sidebar/sidebar-group-list');
+                        } 
+                        ?>
+                </div>
+				<span class="user-navigate scrollRight"><a id="scrollRight" href="javascript:;"><i class="zmdi zmdi-chevron-left bold"></i></a></span>
+				<span class="user-navigate scrollLeft"><a id="scrollLeft" href="javascript:;"><i class="zmdi zmdi-chevron-right bold"></i></a></span>
+			</div>
+                <div class="clear"></div>
+            </li>
+        </ul>
+        <?php } } ?>
+        <?php if ($wo['config']['online_sidebar'] == 1) { ?>
+        <ul class="list-group">
+            <?php $online = Wo_CountOnlineData();?>
+            <li class="list-group-item side-widget-name" contenteditable="false"> <?php echo $wo['lang']['online_users'];?> <?php echo $online;?></li>
+            <li>
+                <div class="clear"></div>
+            </li>
+        </ul>
+        <?php
+            }
+            $sidebar_ad = Wo_GetAd('sidebar', false);
+            if (!empty($sidebar_ad)) {?>
+        <ul class="list-group sidebar-ad">
+            <li><?php echo $sidebar_ad; ?></li>
+        </ul>
+        <?php } ?>
+        <ul class="list-group">
+            <li class="list-group-item side-widget-name" contenteditable="false"><?php echo $wo['lang']['invite_your_frineds_home']; ?></li>
+            <li>
+                <form action="#" style="margin:10px; margin-bottom: 0;" method="post" class="row invite-user-form">
+                    <input type="text" name="email" placeholder="<?php echo $wo['lang']['email']; ?>" class="form-control" onclick="Wo_ShowInviteButton()"><br>
+                    <button class="mdbtn wabe btn btn-main btn-sm" style="width:100%"><i class="fa fa-paper-plane-o progress-icon" data-icon="paper-plane-o"></i> <?php echo $wo['lang']['send_invitation']; ?></button>
+                    <div class="clear"></div>
+                </form>
+            </li>
+        </ul>
+        <?php if ($wo['config']['classified'] == 1): ?>
+        <div id="sidebar-latest-products" class="sidebar-latest-products">
+            <?php $get_latest_products = Wo_GetProducts(array('limit' => 9)); ?>
+            <ul class="list-group">
+                <li id="sideproheader" class="list-group-item text-muted side-widget-name" contenteditable="false"><a href="<?php echo Wo_SeoLink('index.php?link1=products') ?>"><?php echo $wo['lang']['latest_products'] ?></a>
+                </li>
+                <li class="activities-wrapper customscrollhead" style="max-height: 315px;">
+                    <?php 
+                    foreach ($get_latest_products as $key => $wo['product']) {
+                         echo Wo_LoadPage('products/product-style');
+                    } 
+                    ?>
+					
+					<?php if (count($get_latest_products) > 0) { ?>
+					<div style="width:100%;text-align:center;"><a href="<?php echo Wo_SeoLink('index.php?link1=products') ?>" style="font-size: 14px;"><i class="zmdi zmdi-shopping-cart-plus view-all-products"></i><br>
+					<?php if($wo['language'] == "english") { ?>View All<?php } ?>
+							<?php if($wo['language'] == "arabic") { ?>عرض الكل<?php } ?>
+							<?php if($wo['language'] == "dutch") { ?>Bekijk alles<?php } ?>
+							<?php if($wo['language'] == "french") { ?>Voir tout<?php } ?>
+							<?php if($wo['language'] == "german") { ?>Alle anzeigen<?php } ?>
+							<?php if($wo['language'] == "italian") { ?>Guarda tutto<?php } ?>
+							<?php if($wo['language'] == "portuguese") { ?>Ver tudo<?php } ?>
+							<?php if($wo['language'] == "russian") { ?>Посмотреть все<?php } ?>
+							<?php if($wo['language'] == "spanish") { ?>Ver todo<?php } ?>
+							<?php if($wo['language'] == "turkish") { ?>Hepsini gör<?php } ?>
+					</a></div>
+					<?php } ?>
+                </li>
+            </ul>
+        </div>
+        <?php endif ?>
+        <div id="sidebar-sticky">
+            <?php $activities = Wo_GetActivities();?>
+            <ul class="list-group activity-container hideinactivity">
+                <li class="list-group-item text-muted side-widget-name" contenteditable="false"><?php echo $wo['lang']['latest_activities']; ?>
+                    <?php if (count($activities) > 0) { ?> <span onclick="Wo_GetMoreActivities();" title= "<?php echo $wo['lang']['load_more_activities'];?>" class="<?php echo Wo_RightToLeft('pull-right');?>  refresh" >
+                    <i class="fa fa-repeat progress-icon" data-icon="repeat"></i>
+                    </span><?php } ?>
+                </li>
+                <li class="activities-wrapper" id="activities-wrapper">
+                    <?php
+                        if (count($activities) == 0) {
+                            echo '<h2><div class="no-activities text-center">' . $wo['lang']['no_activities'] . '</div><h2>';
+                        } else {
+                            foreach ($activities as $wo['activity']) {
+                                echo Wo_LoadPage('sidebar/activities-list');
+                            }
+                        }
+                        ?>
+                </li>
+                <li>
+                    <div class="no-activities center-text"></div>
+                </li>
+            </ul>
+            
+        </div>
+		
+		<?php if ($wo['config']['user_ads'] == 1): ?>
+        <div id="sidebar-sticky">
+            <?php 
+                foreach (Wo_GetSideBarAds() as $wo['sidebar-ad']) {
+                    echo Wo_LoadPage('ads/includes/sidebar-ad');
+                }
+            ?>
+
+            <div class="clear"></div>
+            <div>
+                
+                <div class="clear"></div>
+            </div>
+        </div>
+        <?php endif; ?>
+		<?php echo Wo_LoadPage('footer/sidebar-footer')?>
+    </div>
+</div>
+<script>
+    function Wo_GetNewActivities() {
+      var before_activity_id = $('#activities-wrapper > .activity').attr('data-activity-id');
+      if (typeof before_activity_id === 'undefined') {
+           return false;
+      }
+      $.post(Wo_Ajax_Requests_File() + '?f=activities&s=get_new_activities', {
+        before_activity_id: before_activity_id
+      }, function (data) {
+        if(data.status == 200) {
+          $('.activities-wrapper').prepend(data.html);
+        }
+      });
+    }
+    function Wo_GetMoreActivities() {
+      var activity_container = $('.activity-container');
+      var after_activity_id = $('#activities-wrapper .activity:last').attr('data-activity-id');
+      Wo_progressIconLoader(activity_container);
+      $.post(Wo_Ajax_Requests_File() + '?f=activities&s=get_more_activities', {
+        after_activity_id: after_activity_id
+      }, function (data) {
+        if(data.status == 200) {
+          if(data.html.length == 0) {
+            $('.no-activities').html(data.message);
+          } else {
+            $('#activities-wrapper').append(data.html);
+          }
+          $("#activities-wrapper").animate({
+            scrollTop: $('#activities-wrapper')[0].scrollHeight
+          }, 100);
+          Wo_progressIconLoader(activity_container);
+        }
+      });
+    }
+   $(function() {
+     $('form.invite-user-form').ajaxForm({
+       url: Wo_Ajax_Requests_File() + '?f=invite_user',
+       beforeSend: function() {
+         Wo_progressIconLoader($('form.invite-user-form').find('button'));
+       },
+       success: function(data) {
+         if (data.status == 200) {
+			Snackbar.show({text: '<div>'+ data.message +'</div>'});
+         } else {
+             var errors = data.errors.join("<br>");
+			 Snackbar.show({text: '<div>'+ errors +'</div>'});
+         }
+         Wo_progressIconLoader($('form.invite-user-form').find('button'));
+       }
+     });
+   });
+function Wo_ShowInviteButton() {
+    $('.invite-user-form').css('margin-bottom', '10px');
+    $('.invite-user-form button').css('display', 'block');
+}
+  
+$(document).ready(function() {
+    var weather = $("#weather").wonderfulWeather({
+
+        location: "<?php echo $wo['user']['address'];?>",		//city and region *required 
+        country: "<?php echo $wo['user']['address'];?>",		//country *required 
+
+        //Options:
+        api: "yahoo",
+        view : "partial",
+        timeformat: "12",				//"24" or "12" default: "12"
+        displayCityNameOnly : false,	//default: false (true/false) if you want to display only city name
+        forecast: 4,					//default: 5 (0 -5) how many days you want forecast
+        loadingAnimation: true,			//default: true (true/false) if you want plugin to show loading animation
+        units : "metric",				//"metric" or "imperial"
+		
+		//translation strings, If you would like to use another language please replace these strings with your language
+		strings : {
+		days: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+		},
+    });
+  });
+</script>

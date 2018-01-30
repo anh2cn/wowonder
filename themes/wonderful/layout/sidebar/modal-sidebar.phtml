@@ -1,0 +1,83 @@
+<div class="modal modal-left fade" id="sidebar-left-modal" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body ps-container ps-theme-default">
+               
+				<div class="left-sidebar" style="display:block">
+					<div class="sidebar-conatnier">
+						<div class="home profile-style main sidebar-profile-style">
+							<div class="card hovercard">
+								<div class="cardheader" style="background-image:url(<?php echo $wo['user']['cover']?>)">
+														 <?php if ($wo['loggedin'] == true) { ?>
+									<div id="avatarm">
+										<img id="updateImage-<?php echo $wo['user']['user_id']?>" alt="<?php echo $wo['user']['name']?> Profile Picture" src="<?php echo $wo['user']['avatar']?>">
+									</div>
+									<a data-toggle="dropdown" class="wabe sidebar-brand" href="#settings-dropdown">
+										<div>
+											<p style="margin: 0px;overflow: hidden;text-overflow: ellipsis;">
+												<?php echo $wo['user']['name']?>
+												<?php if($wo['user']['verified'] == 1):?>
+													<i class="fa fa-check-circle verified-color"></i>
+												<?php endif;?>
+											</p>
+											<p style="margin: 0px;overflow: hidden;text-overflow: ellipsis;">
+												<?php echo $wo['user']['email']?>
+											</p>
+										</div>
+										<b class="caret"></b>
+									</a>
+															<?php } ?>
+								</div>
+							</div>
+						</div>
+					</div>
+					<ul>
+						<li>
+							<ul id="settings-dropdown" class="dropdown-menu" style="display: none;">
+								<li>
+									<a class="wabe" href="<?php echo Wo_SeoLink('messages'); ?>">
+										<i class="zmdi zmdi-comment-text-alt zmdi-hc-fw"></i> <?php echo $wo['lang']['messages'];?>
+									</a>
+								</li>
+								<li>
+									<a class="wabe" href="<?php echo Wo_SeoLink('setting'); ?>">
+										<i class="zmdi zmdi-settings zmdi-hc-fw"></i> <?php echo $wo['lang']['setting'];?>
+									</a>
+								</li>
+								<li style="margin-bottom: 0px;">
+									<a class="wabe" href="<?php echo Wo_SeoLink('logout'); ?>">
+										<i class="zmdi zmdi-power zmdi-hc-fw"></i> <?php echo $wo['lang']['log_out'];?>
+									</a>
+								</li>
+							</ul>
+						</li>
+						<li> <a  class="wabe" href="https://diadiemhaiduong.com/new-product"> <img src="<?php echo $wo['config']['theme_url'];?>/img/menu/dang.svg">Đăng miễn phí</a></li>
+						<li> <a  class="wabe" href="https://diadiemhaiduong.com/congdongmuasam"> <img src="<?php echo $wo['config']['theme_url'];?>/img/menu/follow.svg">Cộng đồng mua bán</a></li>
+	                	<li><hr></li>
+						<li> <a  class="wabe" href="https://diadiemhaiduong.com/products/1"> <img src="<?php echo $wo['config']['theme_url'];?>/img/menu/icon-do-an.svg">Địa điểm ăn uống</a></li>
+						<li> <a  class="wabe" href="https://diadiemhaiduong.com/products/2"> <img src="<?php echo $wo['config']['theme_url'];?>/img/menu/ship-do-an.svg">Đồ ăn ship</a></li>
+						<li> <a  class="wabe" href="https://diadiemhaiduong.com/products/3"> <img src="<?php echo $wo['config']['theme_url'];?>/img/menu/icon-do-an.svg">Ăn vặt</a></li>
+						<li> <a  class="wabe" href="https://diadiemhaiduong.com/products/4"> <img src="<?php echo $wo['config']['theme_url'];?>/img/menu/cafe.svg">Cafe & trà sữa</a></li>
+						<li> <a  class="wabe" href="https://diadiemhaiduong.com/products/5"> <img src="<?php echo $wo['config']['theme_url'];?>/img/menu/girl.svg">Thời trang nữ</a></li>
+						<li> <a  class="wabe" href="https://diadiemhaiduong.com/products/6"> <img src="<?php echo $wo['config']['theme_url'];?>/img/menu/giay-dep-nu.svg">Giầy dép nữ</a></li>
+						<li> <a  class="wabe" href="https://diadiemhaiduong.com/products/7"> <img src="<?php echo $wo['config']['theme_url'];?>/img/menu/boy.svg">Thời trang nam</a></li>
+						<li> <a  class="wabe" href="https://diadiemhaiduong.com/products/8"> <img src="<?php echo $wo['config']['theme_url'];?>/img/menu/giay-dep-nam.svg">Giầy dép nam</a></li>
+						<li> <a  class="wabe" href="https://diadiemhaiduong.com/products/9"> <img src="<?php echo $wo['config']['theme_url'];?>/img/menu/tui-vi.svg">Túi ví</a></li>
+						<li> <a  class="wabe" href="https://diadiemhaiduong.com/products/10"> <img src="<?php echo $wo['config']['theme_url'];?>/img/menu/dong-ho.svg">Đồng hồ</a></li>
+						<li> <a  class="wabe" href="https://diadiemhaiduong.com/products/11"> <img src="<?php echo $wo['config']['theme_url'];?>/img/menu/me-va-be.svg">Mẹ và bé</a></li>
+						<li> <a  class="wabe" href="https://diadiemhaiduong.com/products/12"> <img src="<?php echo $wo['config']['theme_url'];?>/img/menu/giay-dep-nam.svg">Tóc, móng & làm đẹp</a></li>
+						<li> <a  class="wabe" href="https://diadiemhaiduong.com/products/13"> <img src="<?php echo $wo['config']['theme_url'];?>/img/menu/iphone.svg">Điện thoại & phụ kiện</a></li>
+						<li> <a  class="wabe" href="https://diadiemhaiduong.com/products/14"> <img src="<?php echo $wo['config']['theme_url'];?>/img/menu/may-giat.svg">Tivi, tủ lạnh & máy giặt</a></li>
+						<li> <a  class="wabe" href="https://diadiemhaiduong.com/products/15"> <img src="<?php echo $wo['config']['theme_url'];?>/img/menu/giadung.svg">Đồ gia dụng</a></li>
+						<li> <a  class="wabe" href="https://diadiemhaiduong.com/products/16"> <img src="<?php echo $wo['config']['theme_url'];?>/img/menu/nha.svg">Trang trí nhà cửa</a></li>
+						<li> <a  class="wabe" href="https://diadiemhaiduong.com/products/17"> <img src="<?php echo $wo['config']['theme_url'];?>/img/menu/perfume.svg">Mỹ phẩm & nước hoa</a></li>
+						<li> <a  class="wabe" href="https://diadiemhaiduong.com/products/18"> <img src="<?php echo $wo['config']['theme_url'];?>/img/menu/oto.svg">Ô tô & xe máy</a></li>
+						<li> <a  class="wabe" href="https://diadiemhaiduong.com/products/19"> <img src="<?php echo $wo['config']['theme_url'];?>/img/menu/game.svg">Đồ chơi</a></li>
+						<li> <a  class="wabe" href="https://diadiemhaiduong.com/products/20"> <img src="<?php echo $wo['config']['theme_url'];?>/img/menu/qua-tang.svg">Hoa & quà tặng</a></li>
+	</ul>
+</div>
+
+            </div>            
+		</div>
+	</div>
+</div>

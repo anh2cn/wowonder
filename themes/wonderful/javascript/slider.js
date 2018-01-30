@@ -1,0 +1,27 @@
+$(function(){
+    $('.owl-one').owlCarousel({
+    items:1,
+    lazyLoad:true,
+    dots:false,
+    loop:true
+    });
+    $('.owl-two').owlCarousel({
+    lazyLoad:true,
+    loop:true,
+    dots:false,
+    responsiveClass:true,
+    responsive:{
+        0:{
+            items:3,
+            autoplay:true
+        },
+        600:{
+            items:6
+        },
+        1000:{
+            items:8,
+            loop:false
+        }
+    }
+    });
+  });

@@ -1,0 +1,15 @@
+<li class="blog">
+	<a href="<?php echo $wo['blog-style']['url'] ?>">
+		<span class="avatar-wrapper">
+			<span class="avatark">
+				<img src="<?php echo $wo['blog-style']['thumbnail'];?>" alt="Article Picture">
+			</span>
+		</span>
+		<span class="blog-title">
+			<?php echo $wo['blog-style']['title'] ?>
+		</span>
+		<span class="blog-info">
+			<?php echo Wo_Time_Elapsed_String($wo['blog-style']['posted']); ?>
+		</span>
+	</a>
+</li>

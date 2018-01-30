@@ -1,0 +1,73 @@
+<div class="page-margin">
+  <div class="row">
+    <div class="col-md-2 offnavmenu"><?php echo Wo_LoadPage("sidebar/left-sidebar"); ?></div>
+    <div class="col-md-7 cushomewider" style="padding-left: 0px;padding-right: 0px;">
+      <div class=" list-group">
+         <div class="list-group-item">
+                   <i class="fa fa-cog fa-fw"></i> App Permissions
+          <div class="clear"></div>
+        </div>
+        <div class="form-horizontal setting-well" method="post">
+          <fieldset class="text-center">
+            <div class="">
+              <div class="avatar">
+                <img src="<?php echo $wo['app']['app_avatar'];?>" alt="<?php echo $wo['app']['app_name']; ?> Profile Picture" style="width: 100px;border-radius: 10px;height: 100px;box-shadow: 0 1px 2px #0000001f;pointer-events: none;user-select: none;"/>
+              </div><br>
+              <div style="font-size: 23px;text-transform: capitalize;"><?php echo $wo['app']['app_name']; ?></div>
+              <div class="app-website" style="font-size: 12px;">
+                <p><?php echo $wo['app']['app_description']?></p>
+              </div>
+            </div>
+            <div class="clear"></div>
+            <hr>
+            <h4 style="font-size: 15px;"><b style="margin: 0;"><?php echo $wo['app']['app_name']; ?></b> will receive the following info: <br><small>(email, profile info, posts)</small></h4>
+            <hr>
+            
+            <div class="form-inline">
+                  <button onclick="Wo_AcceptPermissions(<?php echo $wo['app']['id'];?>);" class="wabe mdbtn btn btn-main" style="padding: 0px 60px;">
+                  <i class="fa fa-check progress-icon" data-icon="check"></i> Accept
+                  </button>
+                  <?php 
+                    $url = $wo['app']['app_website_url'];
+                    if (isset($_GET['redirect_uri']) && !empty($_GET['redirect_uri'])) {
+                        $url = $_GET['redirect_uri'];
+                    
+                    } else if (!empty($wo['app']['app_callback_url'])) {
+                    
+                        $url = $wo['app']['app_callback_url'];
+                    
+                    }
+                    
+                    ?>
+                  <input type="hidden" id="url" name="url" value="<?php echo urlencode($url);?>">
+            </div>
+			
+			<div class="form-inline">
+               <a href="<?php echo $wo['app']['app_website_url'];?>" class="wabe btn" style="box-shadow:none;margin-top: 50px;font-size: 16px;color: #7f7f7f;padding: 6px 40px;">
+                  Back
+                  </a>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+    <!-- .col-md-8 -->
+    <div class="col-md-3 cushomesmaller"><?php echo Wo_LoadPage('sidebar/content');?></div>
+  </div>
+  <!-- .row -->
+</div>
+<!-- .page-margin -->
+<script>
+  function Wo_AcceptPermissions(id) {
+  
+    var url = $('#url').val();
+  
+    $.post(Wo_Ajax_Requests_File() + '?f=apps&s=acceptPermissions', {id:id, url:url}, function (data) {
+      
+      if (data.status == 200) {
+        window.location.href = data.location;
+      }
+  
+    });
+  }
+</script>

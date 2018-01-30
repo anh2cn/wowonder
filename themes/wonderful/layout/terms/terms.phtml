@@ -1,0 +1,36 @@
+<div class="page-margin">
+   <div class="list-group red-list">
+      <div class="list-group-item">Terms Of Use</div>
+      <div class="setting-well">
+       <?php echo $wo['terms']['terms_of_use'];?>
+      </div>
+   </div>
+</div>
+<style>
+body {padding-left: 0px;}
+.navbar-default {padding-right: 0px;}
+@media (min-width: 1200px){
+body {padding-left: 0px;padding-right: 205px;}
+.navbar-default {padding-right: 205px;}
+}
+@media (min-width: 1500px){
+body {padding-left: 0px;padding-right: 260px;}
+}
+@media (max-width: 990px) {
+body {padding-left: 0px;overflow-x: auto;}
+}
+</style>
+<?php if($wo['loggedin'] == false) {  ?>
+<style>
+body {padding-left: 0px;}
+.navbar-default {padding-right: 0px;}
+@media (min-width: 1200px){
+body {padding-left: 0px;padding-right: 0px;}
+.navbar-default {padding-right: 0px;}
+}
+@media (max-width: 990px) {
+body {padding-left: 0px;overflow-x: auto;}
+.hideinmenu {display: none;}
+}
+</style>
+<?php } ?>

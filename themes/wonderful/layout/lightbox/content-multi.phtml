@@ -1,0 +1,14 @@
+<div class="lightbox-backgrond" onclick="Wo_CloseLightbox();"></div>
+<div class="lightbox-content multi">
+<button type="button" class="close" onclick="Wo_CloseLightbox();" style="color: #fff;opacity: 0.8;font-size: 35px;text-shadow: none;margin-left: 10px;">&times;</button>
+  <div class="story-img">
+      <img src="<?php echo $wo['lighbox']['url'];?>" alt="media">
+  </div>
+</div>
+<script>
+$(document).keydown(function(e) {
+    if (e.keyCode == 27) {
+        Wo_CloseLightbox();
+    }   
+});
+</script>
